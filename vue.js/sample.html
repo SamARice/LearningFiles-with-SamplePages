@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>First Vue Page</title>
+</head>
+<body>
+    <!-- This line connects the VUE script to this HTML insert the text from a variable using curly brackets-->
+    <div id="app">{{ message }} <br>
+      <!-- Pure JS can be injected via curly braces as well to add things into the div -->
+      {{'Random number: ' + Math.ceil(Math.random()*6) }}
+    </div>
+    <!-- The VUE file this is the library of VUE  -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+
+  <!-- Now we actually give it the script -->
+    <script> 
+
+    // create the application
+      const app = Vue.createApp({
+        // data function returns hello world thats it
+        data() { 
+          return {
+            message: "Hello World"
+          }
+        }
+      })
+
+      // now attach to the html value
+      app.mount('#app')
+
+    </script>
+  
+</body>
+</html>

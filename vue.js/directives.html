@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- style css -->
+  <style>
+    .pinkBG {
+      background-color: lightpink;
+    }
+  </style>
+</head>
+<body>
+
+<!-- give us the app to mount -->
+  <div id="app">
+    <!-- bind the class to the style from the CSS -->
+    <div v-bind:class="vueClass">Text here to show off v-bind</div><br>
+    <div> Show image </div><br>
+    <img v-bind:src="url"><br>
+    <div :style="{ backgroundColor: 'hsl('+bgVal+',80%,80%)' }">This block uses the shorthand</div><br>
+    
+  </div>
+
+  <!-- declare script library-->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <!--then build the Vue scripts-->
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          // return the color by assigning the class to the pinkBG we established in the header
+          vueClass: "pinkBG",
+          // return the file path for the image tag 
+          url: "samplePhoto.png",
+          // using the shorthand of the class while also giving it straight CSS as an example
+          bgVal: 180
+        }
+      }
+    })
+    // mount to the app
+    app.mount('#app')
+  </script>
+</body>
+</html>
