@@ -11,13 +11,33 @@
 <body>
 
 <!-- give us the app to mount -->
-  <div id="app">
+  <div id="bind">
+    <h2>v-bind samples </h2>
     <!-- bind the class to the style from the CSS -->
     <div v-bind:class="vueClass">Text here to show off v-bind</div><br>
     <div> Show image </div><br>
+    <!--set attribute for image from a URL denoted by the script-->
     <img v-bind:src="url"><br>
+    <!-- using the shorthand we set the specific styles -->
     <div :style="{ backgroundColor: 'hsl('+bgVal+',80%,80%)' }">This block uses the shorthand</div><br>
     
+  </div> <br>
+
+  <!--give us the app to mount for if else section-->
+  <div id="ifElseVue">   
+    <h2>v-if samples </h2>
+    <!-- if number given is greater than or equal to 5 determine if in stock and print number-->
+    <p v-if="typewritersInStock >= 6">
+        in stock number: {{typewritersInStock}}
+    </p>
+    <p v-else-if="typewritersInStock >= 3"> 
+        low stock number: {{typewritersInStock}}
+    </p>
+    <p v-else>
+        not in stock number: {{typewritersInStock}}
+    </p><br>
+    <p v-if="text.includes('pizza')">The text includes the word 'pizza'</p>
+    <p v-else>The word 'pizza' is not found in the text</p>
   </div>
 
   <!-- declare script library-->
@@ -25,7 +45,8 @@
 
   <!--then build the Vue scripts-->
   <script>
-    const app = Vue.createApp({
+    // v-bind practice, shorthand : 
+    const bind = Vue.createApp({
       data() {
         return {
           // return the color by assigning the class to the pinkBG we established in the header
@@ -37,8 +58,20 @@
         }
       }
     })
+
+    // v-if, v-else-if, v-else
+    const ifElseVue = Vue.createApp({
+        data() {
+            return {
+                // give me an integer from 1 to 9
+                typewritersInStock: Math.floor(Math.random() * 10),
+                text: 'I like taco, pizza, Thai beef salad, pho soup and tagine.'
+            }
+        }
+    })
     // mount to the app
-    app.mount('#app')
+    bind.mount('#bind')
+    ifElseVue.mount('#ifElseVue')
   </script>
 </body>
 </html>
