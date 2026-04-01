@@ -23,10 +23,15 @@
     
   </div> <br>
 
+
+  <div id="show">
+    <div v-show="showDiv">This div tag can be hidden</div>
+  </div>
+
   <!--give us the app to mount for if else section-->
   <div id="ifElseVue">   
     <h2>v-if samples </h2>
-    <!-- if number given is greater than or equal to 5 determine if in stock and print number-->
+    <!-- if number given is greater than or equal to 6 determine if in stock and print number-->
     <p v-if="typewritersInStock >= 6">
         in stock number: {{typewritersInStock}}
     </p>
@@ -39,6 +44,27 @@
     <p v-if="text.includes('pizza')">The text includes the word 'pizza'</p>
     <p v-else>The word 'pizza' is not found in the text</p>
   </div>
+
+  <div id="forList">
+    <ol>
+    <li v-for="x in manyFoods">{{ x }}</li>
+    </ol>
+  </div>
+
+  <div id="eventHandling">
+    <!-- Needs to tie to an input via v-on or something similar -->
+    <p>{{ "Moose count: " + count }}</p>
+    <button v-on:click="count++">Count moose</button>
+    <br>
+    <input v-on:input="inpCount++">
+    <p>{{ 'Input events occured: ' + inpCount }}</p>
+    <br>
+    <p>Move the mouse pointer over the box below</p>
+    <div v-on:mousemove="colorVal=Math.floor(Math.random()*360)"
+        v-bind:style="{backgroundColor:'hsl('+colorVal+',80%,80%)'}">
+    </div>
+  </div>
+
 
   <!-- declare script library-->
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -69,10 +95,50 @@
             }
         }
     })
+
+    const showDiv = Vue.createApp({
+        data() {
+            return{
+              showDiv: true 
+            }
+        }
+    })
+
+  const forList = Vue.createApp({
+   data() {
+    return {
+      manyFoods: [
+        'Burrito',
+        'Salad',
+        'Cake',
+        'Soup',
+        'Fish',
+        'Pizza',
+        'Rice'
+      ]
+    }
+   }
+  })
+
+    const eventHandling = Vue.createApp({
+    data() {
+      return {
+        count: 0,
+        inpCount: 0,
+        colorVal: 50
+      }
+    }
+  })
+ 
+
+
     // mount to the app
     bind.mount('#bind')
     ifElseVue.mount('#ifElseVue')
-    
+    showDiv.mount("#showDiv")
+    forList.mount("#forList")
+    eventHandling.mount('#eventHandling') 
+
   </script>
 </body>
 </html>
